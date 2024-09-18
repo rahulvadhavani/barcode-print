@@ -12,52 +12,47 @@
             font-family: Arial, sans-serif;
         }
 
-
-        /* Label size and page break settings */
+        /* Label size with padding */
         .label {
             display: flex;
             justify-content: center;
             align-items: center;
+            /* width: 100mm; */
+            /* height: 40mm; */
+            /* padding: 10px 15px; */
+            box-sizing: border-box;
             page-break-inside: avoid;
             page-break-after: always;
-            box-sizing: border-box;
-            /* Ensure padding and border are included */
-            padding: 0;
-            margin: 0;
+            /* border: 1px solid red; */
         }
 
         /* Content inside label */
         .barcode-content {
             text-align: center;
             width: 100%;
-            /* height: 100%; */
             box-sizing: border-box;
-            /* Ensure padding and border are included */
         }
 
-        .barcode-html {
+        /* Barcode image styling */
+        .barcode-image {
+            max-width: 100%;
             width: 100%;
-            /* height: auto; */
+            height: auto;
         }
+        @page{ margin: 30px 40px;}
 
-        .barcode-number {
-            font-size: 12pt;
-            margin-top: 10pt;
-        }
     </style>
 </head>
 
 <body>
 
     @foreach($barcodes as $barcode)
-    <div class="label" style="border: 1px solid red;">
+    <div class="label">
         <div class="barcode-content">
-            <div class="barcode-html">{!! $barcode['barcode_html'] !!}</div>
-            <div class="barcode-number">{{ $barcode['code'] }}</div>
+            <!-- Display the PNG barcode image -->
+            <img src="data:image/png;base64,{{ $barcode['barcode_html'] }}" alt="Barcode" class="barcode-image" />
+            <!-- <div class="barcode-number">{{ $barcode['code'] }}</div> -->
         </div>
     </div>
     @endforeach
 
-</body>
-
-</html>
